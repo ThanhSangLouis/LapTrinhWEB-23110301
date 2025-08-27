@@ -106,10 +106,8 @@ public class UserDaoImpl extends DBConnect implements IUserDao{
 	@Override
 	public void insert(UserModel user) {
 		String sql = "INSERT INTO Users (userName, email, passWord, fullName, avatar, roleid, phone, createdDate) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-		
 		try (Connection conn = getConnection();
 			 PreparedStatement stmt = conn.prepareStatement(sql)) {
-			
 			stmt.setString(1, user.getUserName());
 			stmt.setString(2, user.getEmail());
 			stmt.setString(3, user.getPassWord());
@@ -123,6 +121,55 @@ public class UserDaoImpl extends DBConnect implements IUserDao{
 			e.printStackTrace();
 		}
 	}
+
+	@Override
+	public boolean checkExistEmail(String email) {
+		boolean duplicate = false;
+		String query = "SELECT * FROM Users WHERE email = ?";
+		try (Connection conn = getConnection();
+			 PreparedStatement ps = conn.prepareStatement(query)) {
+			ps.setString(1, email);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				duplicate = true;
+			}
+			rs.close();
+		} catch (Exception ex) {}
+		return duplicate;
+	}
+
+	@Override
+	public boolean checkExistUsername(String username) {
+		boolean duplicate = false;
+		String query = "SELECT * FROM Users WHERE userName = ?";
+		try (Connection conn = getConnection();
+			 PreparedStatement ps = conn.prepareStatement(query)) {
+			ps.setString(1, username);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				duplicate = true;
+			}
+			rs.close();
+		} catch (Exception ex) {}
+		return duplicate;
+	}
+
+	@Override
+	public boolean checkExistPhone(String phone) {
+		boolean duplicate = false;
+		String query = "SELECT * FROM Users WHERE phone = ?";
+		try (Connection conn = getConnection();
+			 PreparedStatement ps = conn.prepareStatement(query)) {
+			ps.setString(1, phone);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				duplicate = true;
+			}
+			rs.close();
+		} catch (Exception ex) {}
+		return duplicate;
+	}
+
 
 	@Override
 	public void update(UserModel user) {
@@ -145,4 +192,5 @@ public class UserDaoImpl extends DBConnect implements IUserDao{
 			e.printStackTrace();
 		}
 	}
+	
 }

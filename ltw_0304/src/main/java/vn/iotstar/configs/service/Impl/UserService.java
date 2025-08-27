@@ -26,7 +26,6 @@ public class UserService implements IUserService {
 		if (user != null) {
 			return user;
 		}
-		
 		// Fallback to searching through all users
 		List<UserModel> users = userDao.findAll();
 		for (UserModel u : users) {
@@ -35,5 +34,48 @@ public class UserService implements IUserService {
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public boolean register(String username, String password, String email, String fullname, String phone) {
+		if (checkExistEmail(email) || checkExistUsername(username) || checkExistPhone(phone)) {
+			return false;
+		}
+		UserModel user = new UserModel();
+		user.setUserName(username);
+		user.setPassWord(password);
+		user.setEmail(email);
+		user.setFullName(fullname);
+		user.setPhone(phone);
+		user.setAvatar(null); // hoặc set avatar mặc định nếu có
+		user.setRoleid(1); // 1: user thông thường, tuỳ hệ thống
+		user.setCreatedDate(new java.sql.Date(System.currentTimeMillis()));
+		try {
+			userDao.insert(user);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	@Override
+	public boolean checkExistEmail(String email) {
+		return userDao.checkExistEmail(email);
+	}
+
+	@Override
+	public boolean checkExistUsername(String username) {
+		return userDao.checkExistUsername(username);
+	}
+
+	@Override
+	public boolean checkExistPhone(String phone) {
+		return userDao.checkExistPhone(phone);
+	}
+
+	@Override
+	public void insert(UserModel user) {
+		userDao.insert(user);
 	}
 }
