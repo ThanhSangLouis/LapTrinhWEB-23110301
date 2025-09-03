@@ -1,5 +1,8 @@
 package vn.iotstar.configs.service.Impl;
 
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
 import java.util.List;
 
 import vn.iotstar.configs.dao.IUserDao;
@@ -9,7 +12,7 @@ import vn.iotstar.configs.service.IUserService;
 
 public class UserService implements IUserService {
 	IUserDao userDao = new UserDaoImpl();
-	
+
 	@Override
 	public UserModel login(String username, String password) {
 		UserModel user = this.FindByUsername(username);
@@ -48,7 +51,7 @@ public class UserService implements IUserService {
 		user.setFullName(fullname);
 		user.setPhone(phone);
 		user.setAvatar(null); // hoặc set avatar mặc định nếu có
-		user.setRoleid(1); // 1: user thông thường, tuỳ hệ thống
+		user.setRoleid(2); // 2: user thông thường, tuỳ hệ thống
 		user.setCreatedDate(new java.sql.Date(System.currentTimeMillis()));
 		try {
 			userDao.insert(user);
@@ -78,4 +81,22 @@ public class UserService implements IUserService {
 	public void insert(UserModel user) {
 		userDao.insert(user);
 	}
+
+
+	@Override
+	public boolean updatePasswordByEmail(String email, String newPassword) {
+	    UserModel user = userDao.findByEmail(email);
+	    if (user != null) {
+	        user.setPassWord(newPassword);  
+	        try {
+	            userDao.update(user);
+	            return true;
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    }
+	    return false;
+	}
+
+
 }

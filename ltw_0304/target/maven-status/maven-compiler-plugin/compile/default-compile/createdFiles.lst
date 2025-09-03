@@ -1,0 +1,9 @@
+vn\iotstar\configs\controller\HomeController.class
+vn\iotstar\configs\DBConnect.class
+vn\iotstar\configs\model\UserModel.class
+vn\iotstar\configs\service\IUserService.class
+vn\iotstar\configs\controller\LogginController.class
+vn\iotstar\configs\controller\WaitingController.class
+vn\iotstar\configs\controller\ForgetPasswordController.class
+vn\iotstar\configs\controller\LogoutController.class
+vn\iotstar\configs\controller\RegisterController.class

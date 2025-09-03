@@ -35,6 +35,8 @@
         <c:if test="${not empty errorMessage}">
             <div style="color: red;">${errorMessage}</div>
         </c:if>
+        <a href="${pageContext.request.contextPath}/forget-password">Quên mật khẩu?</a>
+        <a href="${pageContext.request.contextPath}/logout">Đăng xuất</a>
     </form>
 </body>
 </html>

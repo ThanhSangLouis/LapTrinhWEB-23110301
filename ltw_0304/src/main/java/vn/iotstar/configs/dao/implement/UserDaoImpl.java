@@ -192,5 +192,33 @@ public class UserDaoImpl extends DBConnect implements IUserDao{
 			e.printStackTrace();
 		}
 	}
+
+	@Override
+	public UserModel findByEmail(String email) {
+		UserModel user = null;
+		String sql = "SELECT * FROM Users WHERE email = ?";
+		try (Connection conn = getConnection();
+			 PreparedStatement stmt = conn.prepareStatement(sql)) {
+			
+			stmt.setString(1, email);
+			ResultSet rs = stmt.executeQuery();
+			
+			if (rs.next()) {
+				user = new UserModel();
+				user.setId(rs.getInt("id"));
+				user.setUserName(rs.getString("userName"));
+				user.setEmail(rs.getString("email"));
+				user.setPassWord(rs.getString("passWord"));
+				user.setFullName(rs.getString("fullName"));
+				user.setAvatar(rs.getString("avatar"));
+				user.setRoleid(rs.getInt("roleid"));
+				user.setPhone(rs.getString("phone"));
+				user.setCreatedDate(rs.getDate("createdDate"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return user;
+	}
 	
 }

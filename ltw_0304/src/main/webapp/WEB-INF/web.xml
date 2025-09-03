@@ -19,5 +19,29 @@
     <welcome-file-list>
         <welcome-file>views/login.jsp</welcome-file>
     </welcome-file-list>
-    
+      <filter>
+    <filter-name>sitemesh</filter-name>
+    <filter-class>org.sitemesh.config.ConfigurableSiteMeshFilter</filter-class>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>sitemesh</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <servlet>
+    <servlet-name>ForgetPasswordController</servlet-name>
+    <servlet-class>vn.iotstar.configs.controller.ForgetPasswordController</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>ForgetPasswordController</servlet-name>
+    <url-pattern>/forget-password</url-pattern>
+</servlet-mapping>
+<servlet>
+    <servlet-name>LogoutController</servlet-name>
+    <servlet-class>vn.iotstar.configs.controller.LogoutController</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>LogoutController</servlet-name>
+    <url-pattern>/logout</url-pattern>
+</servlet-mapping>
 </web-app>
