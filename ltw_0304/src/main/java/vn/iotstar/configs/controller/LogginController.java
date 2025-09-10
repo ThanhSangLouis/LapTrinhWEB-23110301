@@ -3,6 +3,7 @@ package vn.iotstar.configs.controller;
 import java.io.IOException;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -13,6 +14,7 @@ import vn.iotstar.configs.service.IUserService;
 import vn.iotstar.configs.service.Impl.UserService;
 import vn.iotstar.configs.util.Constant;
 
+@WebServlet(urlPatterns = { "/login" })
 public class LogginController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -21,6 +23,24 @@ public class LogginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        // Xóa session nếu tồn tại
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate();
+        }
+
+        // Xóa cookie Remember Me nếu tồn tại
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (Constant.COOKIE_REMEMBER.equals(cookie.getName())) {
+                    cookie.setMaxAge(0);
+                    response.addCookie(cookie);
+                }
+            }
+        }
+
+        // Chuyển hướng đến trang login
         request.getRequestDispatcher("/views/login.jsp").forward(request, response);
     }
 

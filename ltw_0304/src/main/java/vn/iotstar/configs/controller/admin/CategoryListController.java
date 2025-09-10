@@ -9,7 +9,7 @@ import jakarta.servlet.http.*;
 import vn.iotstar.configs.model.Category;
 import vn.iotstar.configs.service.Impl.CategoryServiceImpl;
 
-@WebServlet("/admin/category/list")
+@WebServlet(urlPatterns = {"/admin/categories", "/admin/category/list"})
 public class CategoryListController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 

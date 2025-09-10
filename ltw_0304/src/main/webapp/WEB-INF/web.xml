@@ -1,47 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
-    version="6.0">
-    
-    <display-name>ltw_0304</display-name>
-    
-    <servlet>
-        <servlet-name>LogginController</servlet-name>
-        <servlet-class>vn.iotstar.configs.controller.LogginController</servlet-class>
-    </servlet>
-    
-    <servlet-mapping>
-        <servlet-name>LogginController</servlet-name>
-        <url-pattern>/login</url-pattern>
-    </servlet-mapping>
-    
-    <welcome-file-list>
-        <welcome-file>views/login.jsp</welcome-file>
-    </welcome-file-list>
-      <filter>
-    <filter-name>sitemesh</filter-name>
-    <filter-class>org.sitemesh.config.ConfigurableSiteMeshFilter</filter-class>
-  </filter>
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
+	version="6.0">
+	<display-name>ltw_0304</display-name>
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
 
-  <filter-mapping>
-    <filter-name>sitemesh</filter-name>
-    <url-pattern>/*</url-pattern>
-  </filter-mapping>
-  <servlet>
-    <servlet-name>ForgetPasswordController</servlet-name>
-    <servlet-class>vn.iotstar.configs.controller.ForgetPasswordController</servlet-class>
-</servlet>
-<servlet-mapping>
-    <servlet-name>ForgetPasswordController</servlet-name>
-    <url-pattern>/forget-password</url-pattern>
-</servlet-mapping>
-<servlet>
-    <servlet-name>LogoutController</servlet-name>
-    <servlet-class>vn.iotstar.configs.controller.LogoutController</servlet-class>
-</servlet>
-<servlet-mapping>
-    <servlet-name>LogoutController</servlet-name>
-    <url-pattern>/logout</url-pattern>
-</servlet-mapping>
+	<filter>
+		<filter-name>sitemesh</filter-name>
+		<filter-class>org.sitemesh.config.ConfigurableSiteMeshFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>sitemesh</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 </web-app>

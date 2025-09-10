@@ -2,13 +2,14 @@ package vn.iotstar.configs.controller;
 
 import java.io.IOException;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import vn.iotstar.configs.service.IUserService;
 import vn.iotstar.configs.service.Impl.UserService;
-
+@WebServlet(urlPatterns = { "/forget-password" })
 public class ForgetPasswordController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private IUserService userService = new UserService();
@@ -28,7 +29,7 @@ public class ForgetPasswordController extends HttpServlet {
             boolean emailExists = userService.checkExistEmail(email);
             if (emailExists) {
                 req.setAttribute("emailValid", true);
-                req.setAttribute("email", email); // giữ lại email
+                req.setAttribute("email", email); // giữ lại email  
                 req.setAttribute("message", "Email hợp lệ. Vui lòng nhập mật khẩu mới.");
             } else {
                 req.setAttribute("emailValid", false);
