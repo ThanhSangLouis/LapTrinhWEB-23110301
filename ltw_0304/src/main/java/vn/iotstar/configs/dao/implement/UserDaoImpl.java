@@ -11,6 +11,17 @@ import vn.iotstar.configs.dao.IUserDao;
 import vn.iotstar.configs.model.UserModel;
 
 public class UserDaoImpl extends DBConnect implements IUserDao{
+	@Override
+	public void delete(int id) {
+		String sql = "DELETE FROM Users WHERE id = ?";
+		try (Connection conn = getConnection();
+			 PreparedStatement stmt = conn.prepareStatement(sql)) {
+			stmt.setInt(1, id);
+			stmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
 	@Override
 	public List<UserModel> findAll() {

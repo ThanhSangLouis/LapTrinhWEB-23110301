@@ -1,9 +1,7 @@
+
+
 package vn.iotstar.configs.service.Impl;
 
-import java.math.BigInteger;
-
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
 import java.util.List;
 
 import vn.iotstar.configs.dao.IUserDao;
@@ -12,6 +10,25 @@ import vn.iotstar.configs.model.UserModel;
 import vn.iotstar.configs.service.IUserService;
 
 public class UserService implements IUserService {
+	@Override
+	public java.util.List<UserModel> findAll() {
+		return userDao.findAll();
+	}
+
+	@Override
+	public UserModel findById(int id) {
+		return userDao.findById(id);
+	}
+
+	@Override
+	public void update(UserModel user) {
+		userDao.update(user);
+	}
+
+	@Override
+	public void delete(int id) {
+		userDao.delete(id);
+	}
 	IUserDao userDao = new UserDaoImpl();
 
 	@Override
@@ -97,6 +114,17 @@ public class UserService implements IUserService {
 	        }
 	    }
 	    return false;
+	}
+
+	@Override
+	public boolean updateProfile(UserModel user) {
+		try {
+			userDao.update(user);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 

@@ -9,13 +9,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 
 
 @Entity
@@ -36,16 +30,7 @@ public class Category implements Serializable{
 	@Column(columnDefinition = "nvarchar(255)", nullable = true)
 	private String images;
 
-	public Category(int id, String name, String images) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.images = images;
-	}
 
-	public Category() {
-		super();
-	}
 
 	public int getId() {
 		return id;

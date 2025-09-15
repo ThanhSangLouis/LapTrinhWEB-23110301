@@ -15,5 +15,6 @@ public interface IUserDao {
     boolean checkExistUsername(String username);
     boolean checkExistPhone(String phone);
     UserModel findByEmail(String email);
+    void delete(int id);
 }
 

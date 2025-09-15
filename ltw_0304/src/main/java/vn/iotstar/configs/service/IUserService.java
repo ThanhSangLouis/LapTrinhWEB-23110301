@@ -11,4 +11,9 @@ public interface IUserService {
 	boolean checkExistPhone(String phone);
 	void insert(UserModel user);
 	boolean updatePasswordByEmail(String email, String newPassword);
+	boolean updateProfile(UserModel user);
+	java.util.List<UserModel> findAll();
+	UserModel findById(int id);
+	void update(UserModel user);
+	void delete(int id);
 }
